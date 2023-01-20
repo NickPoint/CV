@@ -1,111 +1,116 @@
 <template>
-  <div class="container">
-    <div class="row fullscreen">
-      <div id="me-image" class="col-6 col">
+  <div class="container-fluid fullscreen">
+    <div class="row">
+      <div id="me-image" class="col-5 col p-0">
+        <b-img :src="meImage" fluid-grow />
         <span></span>
       </div>
-      <div class="col-6 col">
-        <div class="container">
-          <h1 id="greetings"></h1>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </p>
-        </div>
+      <div class="col-7 col">
+        <GreetingComponent></GreetingComponent>
+        <about-me></about-me>
       </div>
     </div>
-    <span class="my-name-ring">
-      <h2>Mykyta Voievudskyi</h2>
-      <span class="logo"></span>
-    </span>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+import AboutMe from "@/components/AboutMe.vue";
+import GreetingComponent from "@/components/Greeting.vue";
+export default defineComponent({
   name: "MainView",
-  methods: {
-    typeAnimation() {
-      let text = document.getElementById("greetings");
-      let greetings = "Welcome to my CV page";
-      let array = greetings.split("");
-      subAnimation();
-      function subAnimation() {
-        if (array.length > 0) {
-          text.innerHTML += array.shift();
-        } else {
-          return;
-        }
-        setTimeout(subAnimation, 100);
-      }
-    },
+  components: { GreetingComponent, AboutMe },
+  data() {
+    return {
+      meImage: require("@/assets/me.png"),
+    };
   },
-  mounted() {
-    this.typeAnimation();
-  },
-};
+});
+/*import { reactive, computed, onMounted } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const state = reactive({
+  greeting: "",
+});
+
+function getGreeting(): string {
+  return computed(() => store.getters.getGreeting).value;
+}
+
+function getBoolean(): boolean {
+  return computed(() => store.getters.getBoolean).value;
+}
+
+function setGreeting(greeting: string) {
+  store.dispatch("setGreetingAct", greeting);
+}
+
+function setBoolean(boolean: boolean) {
+  store.dispatch("setMainPageIsVisitedAct", boolean);
+}
+
+async function typeAnimation() {
+  let message = "Welcome to my CV page";
+  let array = message.split("");
+  // let greetings = this.greetings;
+  // console.log(greetings);
+  for (let i = 0; i < array.length; i++) {
+    state.greeting += await addLetter(i);
+  }
+  setGreeting(state.greeting);
+  setBoolean(true);
+
+  function addLetter(i: number) {
+    return new Promise((resolve, reject) =>
+      setTimeout(() => {
+        resolve(array[i]);
+      }, 100)
+    );
+  }
+}
+
+onMounted(() => {
+  if (getBoolean()) {
+    typeAnimation();
+  } else {
+    state.greeting = getGreeting();
+  }
+});*/
 </script>
 
 <style lang="scss" scoped>
-.container {
-  position: relative;
-}
+@import "src/assets/custom-vars";
 
 .fullscreen {
   height: 100vh;
+  overflow: auto;
 }
+
 #me-image {
-  background-image: url("/src/assets/me.png");
-  background-size: cover;
-  position: relative;
-}
-#me-image span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #167dff;
-  opacity: 0.3;
+  position: fixed;
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #167dff;
+    opacity: 0.3;
+  }
 }
 
-.row .col:last-child {
-  display: flex;
-  align-items: flex-end;
-}
-
-.my-name-ring {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 250px;
-  height: 250px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  padding: 50px;
-  background-color: #19191c;
-}
-
-.my-name-ring .logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 250px;
-  height: 250px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background-image: url("/src/assets/logo-dark.png");
-  background-size: cover;
-  transition: 0.3s ease-in-out;
-}
-
-.my-name-ring:hover .logo {
-  width: 0;
-  height: 0;
+.row {
+  .col:last-child {
+    margin-top: 15rem;
+    margin-left: auto;
+    * {
+      border-bottom: 1px solid;
+    }
+    .container,
+    .container > :last-child {
+      margin-bottom: $margin-after-each-div-main-view;
+    }
+  }
 }
 </style>
