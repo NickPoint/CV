@@ -1,17 +1,27 @@
 <template>
-  <div class="container-fluid header">
+  <!--  <div class="container-fluid header">
     <div class="justify-content-between d-flex align-items-center">
       <div class="site-logo">
         <img class="logo" src="../assets/logo-light.png" />
         <h2>Mykyta<br />Voievudskyi</h2>
       </div>
-      <nav>
-        <router-link to="/main">Main</router-link>
+      <b-nav>
+        <b-nav-item to="/main">Main</b-nav-item>
         |
-        <router-link to="/about">About</router-link>
-      </nav>
+        <b-nav-item to="/about">About</b-nav-item>
+      </b-nav>
     </div>
-  </div>
+  </div>-->
+  <b-navbar fixed="top" type="dark" variant="secondary">
+    <b-navbar-brand class="d-flex align-items-center" to="/main">
+      <img id="logo" src="../assets/logo-light.png" />
+      <h2>Mykyta<br />Voievudskyi</h2>
+    </b-navbar-brand>
+    <b-navbar-nav class="ml-auto">
+      <b-nav-item to="/main">Main</b-nav-item>
+      <b-nav-item to="/about">About</b-nav-item>
+    </b-navbar-nav>
+  </b-navbar>
 </template>
 
 <script>
@@ -20,36 +30,27 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "/src/assets/custom-vars";
+
 * {
   margin: 0;
 }
 
-.header {
-  position: fixed;
+.navbar {
   top: 50px;
-  z-index: 5;
-}
-
-.header > div {
   width: 90%;
   margin: auto;
-  background-color: #585e63;
   border-radius: 50px;
-  padding: 0 50px;
 }
 
-.site-logo {
-  display: flex;
-  align-items: center;
-}
-
-.site-logo h2 {
+.navbar-brand h2 {
   font-size: 1rem;
+  margin: 0;
 }
 
-.site-logo .logo {
+#logo {
   width: 50px;
-  margin-right: 10px;
+  margin-right: 0.5rem;
 }
 </style>

@@ -1,0 +1,9 @@
+$primary: #167dff;
+$secondary: #585e63;
+$third: #19191c;
+$text: #ffffff;
+$margin-after-each-div-main-view: 5rem;
+$margin-in-each-container: 3rem;
+
+@import "/node_modules/bootstrap/scss/bootstrap";
+@import "/node_modules/bootstrap-vue/src/index.scss";
