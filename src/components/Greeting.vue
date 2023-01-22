@@ -6,7 +6,7 @@
     </span>
 
     <div id="greetings">
-      <h2>{{ greeting }}</h2>
+      <h2 id="I">I'm</h2>
       <span id="typing-cursor"></span>
     </div>
     <p>
@@ -26,58 +26,68 @@ export default defineComponent({
   name: "GreetingComponent",
   data() {
     return {
-      greeting: "",
+      Im: "",
     };
   },
   computed: {
-    getGreeting(): string {
-      return this.$store.getters.getGreeting;
-    },
-    getBoolean(): boolean {
-      return this.$store.getters.getBoolean;
+    getImList(): string[] {
+      return this.$store.getters.getIm;
     },
   },
   methods: {
-    setGreeting(greeting: string) {
-      this.$store.dispatch("setGreetingAct", greeting);
-    },
-    setBoolean(boolean: boolean) {
-      this.$store.dispatch("setMainPageIsVisitedAct", boolean);
-    },
-    async typeAnimation() {
-      let message = "Welcome to my CV page";
-      let array = message.split("");
-      // let greetings = this.greetings;
-      // console.log(greetings);
-      for (let i = 0; i < array.length; i++) {
-        this.greeting += await addLetter(i);
-      }
-      this.setGreeting(this.greeting);
-      this.setBoolean(true);
-
-      function addLetter(i: number) {
-        return new Promise((resolve) =>
-          setTimeout(() => {
-            resolve(array[i]);
-          }, 100)
+    typeAnimation() {
+      let ImText = document.getElementById("Im");
+      if (ImText == null) {
+        console.error(
+          "Animation is not possible because element H2 with id 'Im' is absent"
         );
+        return;
+      }
+      let ImListElement = 0;
+      let ImList = this.getImList;
+      loop();
+      async function loop() {
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+          if (ImListElement >= ImList.length) ImListElement = 0;
+          let message = ImList[ImListElement];
+          let array = message.split("");
+          ImText!.innerHTML += " ";
+          for (let i = 0; i < array.length; i++) {
+            await foo1(i, array);
+          }
+          const waitTime4 = await new Promise((resolve) =>
+            setTimeout(resolve, 4000)
+          );
+          for (let i = 0; i < array.length + 1; i++) {
+            await foo2(ImText!.innerHTML);
+          }
+          const waitTime1 = await new Promise((resolve) =>
+            setTimeout(resolve, 1000)
+          );
+          ImListElement++;
+        }
       }
 
-      /*typeAnimation() {
-    let message = "Welcome to my CV page";
-    let array = message.split("");
-    for (let i = 0; i < array.length; i++) {
-      this.$store.dispatch("addLetterToGreetingAct", array[i]);
-    }
-  },*/
+      function foo1(i: number, char: string[]) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve((ImText!.innerHTML += char[i]));
+          }, 100);
+        });
+      }
+
+      function foo2(string: string) {
+        return new Promise<string>((resolve) => {
+          setTimeout(() => {
+            resolve((ImText!.innerHTML = string.slice(0, -1)));
+          }, 100);
+        });
+      }
     },
   },
   mounted() {
-    if (!this.getBoolean) {
-      this.typeAnimation();
-    } else {
-      this.greeting = this.getGreeting;
-    }
+    this.typeAnimation();
   },
 });
 </script>
