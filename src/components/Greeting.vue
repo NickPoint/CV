@@ -1,12 +1,12 @@
 <template>
-  <div class="container">
+  <b-container>
     <span class="my-name-ring">
       <h2>Mykyta Voievudskyi</h2>
       <span class="logo"></span>
     </span>
 
     <div id="greetings">
-      <h2 id="I">I'm</h2>
+      <h2>I'm <span id="Im"></span></h2>
       <span id="typing-cursor"></span>
     </div>
     <p>
@@ -16,7 +16,7 @@
       make a type specimen book.
     </p>
     <b-button variant="outline-primary">My skills</b-button>
-  </div>
+  </b-container>
 </template>
 
 <script lang="ts">
@@ -24,11 +24,6 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "GreetingComponent",
-  data() {
-    return {
-      Im: "",
-    };
-  },
   computed: {
     getImList(): string[] {
       return this.$store.getters.getIm;
@@ -39,7 +34,7 @@ export default defineComponent({
       let ImText = document.getElementById("Im");
       if (ImText == null) {
         console.error(
-          "Animation is not possible because element H2 with id 'Im' is absent"
+          "Animation is not possible because element with id 'Im' is absent"
         );
         return;
       }
@@ -52,14 +47,13 @@ export default defineComponent({
           if (ImListElement >= ImList.length) ImListElement = 0;
           let message = ImList[ImListElement];
           let array = message.split("");
-          ImText!.innerHTML += " ";
           for (let i = 0; i < array.length; i++) {
             await foo1(i, array);
           }
           const waitTime4 = await new Promise((resolve) =>
             setTimeout(resolve, 4000)
           );
-          for (let i = 0; i < array.length + 1; i++) {
+          for (let i = 0; i < array.length; i++) {
             await foo2(ImText!.innerHTML);
           }
           const waitTime1 = await new Promise((resolve) =>
@@ -81,7 +75,7 @@ export default defineComponent({
         return new Promise<string>((resolve) => {
           setTimeout(() => {
             resolve((ImText!.innerHTML = string.slice(0, -1)));
-          }, 100);
+          }, 50);
         });
       }
     },
@@ -93,6 +87,8 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import "/src/assets/custom-vars";
+
 .my-name-ring {
   $block-width: 300px;
   $block-height: 300px;
@@ -131,10 +127,15 @@ export default defineComponent({
   h2 {
     margin: 0;
   }
-  span {
+  #typing-cursor {
     border-right: 0.5em solid #ffffff;
     animation: blink-caret 0.8s step-end infinite;
   }
+}
+
+#Im {
+  text-decoration: underline $primary;
+  text-underline-offset: 5px;
 }
 
 @keyframes blink-caret {

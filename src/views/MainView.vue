@@ -1,82 +1,43 @@
 <template>
-  <div class="container-fluid fullscreen">
-    <div class="row">
-      <div id="me-image" class="col-5 col p-0">
-        <b-img :src="meImage" fluid-grow />
+  <b-container class="fullscreen" fluid>
+    <b-row>
+      <b-col id="me-image" class="col-5 p-0">
+        <b-img :src="meImage" />
         <span></span>
-      </div>
-      <div class="col-7 col">
-        <GreetingComponent></GreetingComponent>
-        <about-me></about-me>
-      </div>
-    </div>
-  </div>
+      </b-col>
+      <b-col class="col-7">
+        <greeting-component></greeting-component>
+        <about-me-component></about-me-component>
+        <experience-component></experience-component>
+        <education-component></education-component>
+        <coding-skills-component></coding-skills-component>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AboutMe from "@/components/AboutMe.vue";
+import AboutMeComponent from "@/components/AboutMe.vue";
 import GreetingComponent from "@/components/Greeting.vue";
+import ExperienceComponent from "@/components/Experience.vue";
+import EducationComponent from "@/components/Education.vue";
+import CodingSkillsComponent from "@/components/CodingSkills.vue";
 export default defineComponent({
   name: "MainView",
-  components: { GreetingComponent, AboutMe },
+  components: {
+    CodingSkillsComponent,
+    EducationComponent,
+    ExperienceComponent,
+    GreetingComponent,
+    AboutMeComponent,
+  },
   data() {
     return {
       meImage: require("@/assets/me.png"),
     };
   },
 });
-/*import { reactive, computed, onMounted } from "vue";
-import { useStore } from "vuex";
-
-const store = useStore();
-const state = reactive({
-  greeting: "",
-});
-
-function getGreeting(): string {
-  return computed(() => store.getters.getGreeting).value;
-}
-
-function getBoolean(): boolean {
-  return computed(() => store.getters.getBoolean).value;
-}
-
-function setGreeting(greeting: string) {
-  store.dispatch("setGreetingAct", greeting);
-}
-
-function setBoolean(boolean: boolean) {
-  store.dispatch("setMainPageIsVisitedAct", boolean);
-}
-
-async function typeAnimation() {
-  let message = "Welcome to my CV page";
-  let array = message.split("");
-  // let greetings = this.greetings;
-  // console.log(greetings);
-  for (let i = 0; i < array.length; i++) {
-    state.greeting += await addLetter(i);
-  }
-  setGreeting(state.greeting);
-  setBoolean(true);
-
-  function addLetter(i: number) {
-    return new Promise((resolve, reject) =>
-      setTimeout(() => {
-        resolve(array[i]);
-      }, 100)
-    );
-  }
-}
-
-onMounted(() => {
-  if (getBoolean()) {
-    typeAnimation();
-  } else {
-    state.greeting = getGreeting();
-  }
-});*/
 </script>
 
 <style lang="scss" scoped>
@@ -89,6 +50,11 @@ onMounted(() => {
 
 #me-image {
   position: fixed;
+  img {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+  }
   span {
     position: absolute;
     top: 0;

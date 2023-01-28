@@ -1,14 +1,17 @@
 <template>
-  <div class="container">
-    <h2>About Me</h2>
+  <b-container>
+    <div class="div-heading">
+      <h2>About Me</h2>
+      <h6>My story</h6>
+    </div>
     <p>
       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       Lorem Ipsum has been the industry's standard dummy text ever since the
       1500s, when an unknown printer took a galley of type and scrambled it to
       make a type specimen book.
     </p>
-    <div class="row">
-      <div class="col-6">
+    <b-row>
+      <b-col class="col-6">
         <table>
           <tr>
             <td>Age:</td>
@@ -20,11 +23,11 @@
           </tr>
           <tr>
             <td>Degree:</td>
-            <td>Bachelor of Computer Science</td>
+            <td>2 year of Computer Science</td>
           </tr>
         </table>
-      </div>
-      <div class="col-6">
+      </b-col>
+      <b-col class="col-6">
         <table>
           <tr>
             <td>E-mail:</td>
@@ -43,9 +46,9 @@
             <td>Tartu, Estonia</td>
           </tr>
         </table>
-      </div>
-    </div>
-  </div>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

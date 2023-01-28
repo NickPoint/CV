@@ -24,4 +24,17 @@ import Header from "@/components/Header.vue";
 .container > * {
   margin-bottom: $margin-in-each-container;
 }
+.div-heading {
+  h2 {
+    text-transform: capitalize;
+  }
+
+  h6 {
+    text-transform: uppercase;
+    color: $primary;
+  }
+}
+b {
+  color: $accent;
+}
 </style>
