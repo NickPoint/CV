@@ -6,40 +6,27 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   strict: true,
   state: {
-    greeting: "",
-    mainPageIsVisited: false,
+    im: [
+      "programmer",
+      "student of Tartu University",
+      "studying Computer Science",
+      "good teamworker",
+    ],
+    codingSkills: {
+      Python: 70,
+      Java: 85,
+      JavaScript: 70,
+      "HTML/CSS": 95,
+    },
   },
   getters: {
-    getGreeting(state) {
-      return state.greeting;
+    getIm(state) {
+      return state.im;
     },
-    getBoolean(state) {
-      return state.mainPageIsVisited;
-    },
-  },
-  mutations: {
-    setGreeting: (state, greeting) => {
-      state.greeting = greeting;
-    },
-    setMainPageIsVisited: (state, boolean) => {
-      state.mainPageIsVisited = boolean;
+    getCodingSkills(state) {
+      return state.codingSkills;
     },
   },
-  actions: {
-    addLetterToGreetingAct: (act, letter) => {
-      setTimeout(() => {
-        act.commit("addLetterToGreeting", letter);
-      }, 100);
-    },
-    setGreetingAct: (act, greeting) => {
-      setTimeout(() => {
-        act.commit("setGreeting", greeting);
-      }, 100);
-    },
-    setMainPageIsVisitedAct: (act, boolean) => {
-      setTimeout(() => {
-        act.commit("setMainPageIsVisited", boolean);
-      }, 100);
-    },
-  },
+  mutations: {},
+  actions: {},
 });
