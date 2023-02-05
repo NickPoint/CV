@@ -21,20 +21,11 @@ import Header from "@/components/Header.vue";
   background-color: $third;
 }
 
-.container > * {
+#content > .container > * {
   margin-bottom: $margin-in-each-container;
 }
-.div-heading {
-  h2 {
-    text-transform: capitalize;
-  }
 
-  h6 {
-    text-transform: uppercase;
-    color: $primary;
-  }
-}
 b {
-  color: $accent;
+  color: $secondary;
 }
 </style>

@@ -1,9 +1,6 @@
 <template>
   <b-container>
-    <div class="div-heading">
-      <h2>Education</h2>
-      <h6>Studied At</h6>
-    </div>
+    <component-heading :h2="title" :h6="subtitle"></component-heading>
     <b-row>
       <b-col>
         <div id="experience-heading">
@@ -24,8 +21,17 @@
 </template>
 
 <script>
+import ComponentHeading from "@/components/ComponentHeading.vue";
+
 export default {
-  name: "EducationView",
+  name: "EducationComponent",
+  components: { ComponentHeading },
+  data() {
+    return {
+      title: "Education",
+      subtitle: "Studied At",
+    };
+  },
 };
 </script>
 
@@ -66,7 +72,7 @@ $circle-position-left: 10px;
     font-size: 0.75rem;
     left: -35px;
     top: 20px;
-    color: $primary;
+    color: $secondary;
     transform: rotate(-90deg) translate(-50%, 0);
   }
 }

@@ -1,11 +1,8 @@
 <template>
   <b-container>
-    <div class="div-heading">
-      <h2>Professional Experience</h2>
-      <h6>Working with</h6>
-    </div>
+    <component-heading :h2="title" :h6="subtitle"></component-heading>
     <b-row>
-      <b-col>
+      <b-col xl>
         <div id="experience-heading">
           <h4>Job or internship</h4>
           <span class="line"></span>
@@ -17,7 +14,7 @@
           <b>Software Engineer</b>.
         </p>
       </b-col>
-      <b-col>
+      <b-col xl>
         <div id="experience-heading">
           <h4>WordPress freelancer</h4>
           <span class="line"></span>
@@ -34,8 +31,17 @@
 </template>
 
 <script>
+import ComponentHeading from "@/components/ComponentHeading.vue";
+
 export default {
-  name: "ExperienceView",
+  name: "ExperienceComponent",
+  components: { ComponentHeading },
+  data() {
+    return {
+      title: "Professional Experience",
+      subtitle: "Working With",
+    };
+  },
 };
 </script>
 
@@ -46,7 +52,7 @@ $experience-line-thickness: 2px;
 $circle-width-height: 16px;
 $circle-position-top: 15px;
 $circle-position-left: 10px;
-.col {
+.col-xl {
   position: relative;
   padding-left: 40px;
 }
@@ -77,7 +83,7 @@ $circle-position-left: 10px;
     font-size: 0.75rem;
     left: -35px;
     top: 20px;
-    color: $primary;
+    color: $secondary;
     transform: rotate(-90deg) translate(-50%, 0);
   }
 }

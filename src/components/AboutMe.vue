@@ -1,64 +1,84 @@
 <template>
   <b-container>
-    <div class="div-heading">
-      <h2>About Me</h2>
-      <h6>My story</h6>
+    <component-heading :h2="title" :h6="subtitle"></component-heading>
+    <div v-b-toggle="'collapse-about-me'">
+      <p>
+        I'm from Ukraine. One day my family decided to change their lives and we
+        moved to a northern country with stunning forest landscapes called
+        Estonia. Since the local language was completely unknown to me, it was a
+        massive challenge for a 15-year-old teenager to change his life forever.
+      </p>
+      <b-collapse id="collapse-about-me">
+        <p>
+          I only had a year to prepare for the state exams for entering the
+          gymnasium and 3 years to study the Estonian language for my university
+          studies. However, I achieved these goals, and these new conditions
+          helped me to understand that I am a diligent and goal-driven person.
+        </p>
+      </b-collapse>
+      <collapse-arrow></collapse-arrow>
     </div>
-    <p>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the
-      1500s, when an unknown printer took a galley of type and scrambled it to
-      make a type specimen book.
-    </p>
     <b-row>
-      <b-col class="col-6">
-        <table>
-          <tr>
-            <td>Age:</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>Residence:</td>
-            <td>Ukraine</td>
-          </tr>
-          <tr>
-            <td>Degree:</td>
-            <td>2 year of Computer Science</td>
-          </tr>
-        </table>
+      <b-col xl>
+        <div>
+          <span>Age:</span>
+          <span>20</span>
+        </div>
+        <div>
+          <span>Residence:</span>
+          <span>Ukraine</span>
+        </div>
+        <div>
+          <span>Degree:</span>
+          <span>2 year of Computer Science</span>
+        </div>
       </b-col>
-      <b-col class="col-6">
-        <table>
-          <tr>
-            <td>E-mail:</td>
-            <td>
-              <a href="mailto:nikita.voevudsky@gmail.com"
-                >nikita.voevudsky@gmail.com</a
-              >
-            </td>
-          </tr>
-          <tr>
-            <td>Phone:</td>
-            <td><a href="tel:+37258348070">+372 5834 8070</a></td>
-          </tr>
-          <tr>
-            <td>Address:</td>
-            <td>Tartu, Estonia</td>
-          </tr>
-        </table>
+      <b-col xl>
+        <div>
+          <span>E-mail:</span>
+          <span>
+            <a href="mailto:nikita.voevudsky@gmail.com"
+              >nikita.voevudsky@gmail.com</a
+            >
+          </span>
+        </div>
+        <div>
+          <span>Phone:</span>
+          <span><a href="tel:+37258348070">+372 5834 8070</a></span>
+        </div>
+        <div>
+          <span>Address:</span>
+          <span>Tartu, Estonia</span>
+        </div>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import ComponentHeading from "@/components/ComponentHeading.vue";
+import CollapseArrow from "@/components/CollapseArrow.vue";
+
 export default {
-  name: "AboutMe",
+  name: "AboutMeComponent",
+  components: { CollapseArrow, ComponentHeading },
+  data() {
+    return {
+      title: "About Me",
+      subtitle: "My Story",
+    };
+  },
 };
 </script>
 
-<style scoped>
-td:first-child {
-  padding-right: 1rem;
+<style lang="scss" scoped>
+@import "src/assets/custom-vars";
+.col-xl > div {
+  display: flex;
+  justify-content: space-between;
+
+  span:last-child {
+    text-align: right;
+  }
 }
 </style>
