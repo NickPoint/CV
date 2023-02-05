@@ -7,6 +7,10 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: "/",
+    redirect: { name: "main" },
+  },
+  {
+    path: "/CV/",
     name: "main",
     component: MainView,
   },
