@@ -72,4 +72,8 @@ ul.nav > li.nav-item {
   margin-bottom: 1rem;
 }
 </style>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+a {
+  word-break: break-word;
+}
+</style>
