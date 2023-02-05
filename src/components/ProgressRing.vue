@@ -1,5 +1,5 @@
 <template>
-  <b-col class="coding-skill">
+  <b-container class="coding-skill">
     <div :id="name" class="ring-progress">
       <svg :height="radius * 2" :width="radius * 2">
         <circle
@@ -23,7 +23,7 @@
       </svg>
     </div>
     <h4>{{ name }}</h4>
-  </b-col>
+  </b-container>
 </template>
 
 <script>
@@ -38,6 +38,7 @@ export default {
       radius: 75,
       stroke: 4,
       initialProgress: 0,
+      boolean: true,
     };
   },
   computed: {
@@ -57,12 +58,16 @@ export default {
     visible() {
       const observer = new IntersectionObserver(
         (entries) => {
-          if (entries[0].isIntersecting === true) {
-            console.log("start");
-            this.initialProgress = this.givenProgress;
+          if (entries[0].isIntersecting === true && this.boolean) {
+            this.boolean = false;
+            const interval = setInterval(() => {
+              this.initialProgress += 1;
+              if (this.initialProgress === this.givenProgress)
+                clearInterval(interval);
+            }, 10);
           }
         },
-        { threshold: [1] }
+        { threshold: [0.75] }
       );
       observer.observe(document.getElementById(this.name));
     },
@@ -84,7 +89,6 @@ export default {
     text-transform: capitalize;
   }
   circle {
-    transition: stroke-dashoffset 1s ease-in-out;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
     stroke: $primary;
